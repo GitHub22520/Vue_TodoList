@@ -5,7 +5,7 @@
       <div class="todo-wrap">
         <my-header :addTodo="addTodo"></my-header>
         <my-list :todos="todos" :handleTodo="handleTodo"></my-list>
-        <my-footer></my-footer>
+        <my-footer :todos="todos" :checkAll="checkAll" :clearAllDone="clearAllDone"></my-footer>
       </div>
     </div>
   </div>
@@ -60,16 +60,18 @@ export default {
             todoObj.isDone = !todoObj.isDone
         }
       })
-
-
-      // if(x === 1){
-
-      // }else{
-      //   this.todos.forEach((todoObj)=>{
-      //       if(todoObj.id === id)
-      //       todoObj.isDone = !todoObj.isDone
-      //   })
-      // }
+    },
+    //全选or全不选
+    checkAll(isDone){
+      this.todos.forEach((todoObj)=>{
+        todoObj.isDone = isDone
+      })
+    },
+    //删除已完成 todo
+    clearAllDone(){
+      this.todos = this.todos.filter((todoObj)=>{
+        return !todoObj.isDone
+      })
     }
   }
 }
